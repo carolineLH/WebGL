@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>three.js canvas - geometry - earth</title>
+</head>
+<body>
+<div id="container">
+</div>
+<script src="https://threejs.org/build/three.js"></script>
+<script src="https://threejs.org/examples/js/renderers/Projector.js"></script>
+<script src="https://threejs.org/examples/js/renderers/CanvasRenderer.js"></script>
+<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+<script>
+var container, stats;
+// 相机摆在哪？看到的东西，就是相机的镜头
+// 近，远模糊
+// 场景
+
+var camera, scene, renderer;
+var group;
+var mouseX = 0, mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+init();
+animate();
+
+function init() {
+    container = document.getElementById('container');
+    // 准备好镜头
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight,1,2000);
+    camera.position.z = 500;
+    // 场景
+    scene = new THREE.Scene();
+    // 分组
+    group = new THREE.Group();
+    scene.add(group);
+    // 画地球
+    // 加载材质
+    var loader = new THREE.TextureLoader();
+    loader.load('https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg',
+     function(texture) {
+        //  形状 
+        var geometry = new THREE.SphereGeometry(200, 20, 20);
+        // 贴图 材质纹理
+        var material = new THREE.MeshBasicMaterial({
+            map: texture,
+            overdraw: 0.5
+        })
+        var mesh = new THREE.Mesh(geometry, material);
+        group.add(mesh);
+        // var canvas = document.createElement('canvas');
+        renderer = new THREE.CanvasRenderer();
+        renderer.setClearColor(0xffffff);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement)
+        stats = new Stats();
+        // console.log(stats);
+        container.appendChild(stats.dom);
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+    })
+    window.addEventListener('resize', onWindowResize, false);
+}
+
+function onDocumentMouseMove (event) {
+    mouseX = event.clientX - windowHalfX;
+    mouseY = event.clientY - windowHalfY;
+}
+
+function onWindowResize (event) {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+}
+
+function animate () {
+    requestAnimationFrame(animate);
+    render();
+    stats.update();
+}
+function render () {
+    camera.position.x
+     += (mouseX-camera.position.x)*0.05;
+    camera.position.y 
+    += (-mouseY - camera.position.y)*0.05;
+    camera.lookAt(scene.position);
+    group.rotation.y -= 0.005;
+    renderer.render(scene, camera);
+}
+</script>
+</body>
+</html>
