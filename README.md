@@ -35,7 +35,7 @@
 
 5.设置组织者 <br>
 
-##### 是不是一脸懵逼？别怕，来讲个故事<br>
+##### 是不是一脸懵逼？别怕，来讲个故事😁<br>
 其实，就是拍电影啦。需要相机，演员（这里是地球），场景(scene)，导演（group）。导演组织这些活动，导演也要看场景的，他受场景的约束，演员也要听导演的。最后拍好了戏交给渲染器(renderer)来制片，发布。<br>
 
 好吧，这么形象估计懂了，来，我们具体来讲讲。<br>
@@ -146,7 +146,7 @@ function render () {
 
 WebGL是是一种3D绘图标准，这种绘图技术里面用了JavaScript，所以会JavaScript，走遍天下都不怕啊😄<br>
 
-👉：[源码](https://threejs.org/examples/) <br>
+👉：[源码](https://github.com/carolineLH/WebGL/blob/master/WebGL/earth-T.html) <br>
 
 思考好逻辑，就可以动手的!好玩就要去尝试，就在慢慢成长。大家共同进步吧！
 
