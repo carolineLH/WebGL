@@ -43,6 +43,17 @@
 ## 一步步画：
 每个元素都是再定义了之后，在初始化函数内部执行。<br>
 
+### 做准备：
+
+用到three.js框架，要先引入以下：
+
+```
+<script src="https://threejs.org/build/three.js"></script>
+<script src="https://threejs.org/examples/js/renderers/Projector.js"></script>
+<script src="https://threejs.org/examples/js/renderers/CanvasRenderer.js"></script>
+<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+```
+
 ### 画地球：
 看代码：<br>
 ```
