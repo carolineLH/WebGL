@@ -1,4 +1,4 @@
-# jQuery绘制地球
+# WebGL入门demo
 
 ### three.js入门
 
